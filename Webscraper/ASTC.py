@@ -10,7 +10,6 @@ class ASTC:
 
     def search(self):
         centers = self.get_soup().find_all("div", "result address")
-        print(self.state, type(centers), len(centers))
         results = []
         for center in centers:
             data = self.get_center_data(center)
@@ -33,11 +32,14 @@ class ASTC:
         try:
             data["name"] = str(address_title.find("a").text)
         except:
-            data["name"] = None
+            try:
+                data["name"] = address_title.text
+            except:
+                data["name"] = ""
         try:
             data["website"] = str(address_title.find("a", href=True)['href'])
         except:
-            data["website"] = None
+            data["website"] = ""
         try:
             addressElement = center.find("p")
             addresslist = []
