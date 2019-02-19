@@ -273,7 +273,7 @@ function init(){
   
 };
 
-
+var counter= 0;
 var table = $("#markerbody")
 
 function addMarker(e){
@@ -284,17 +284,8 @@ function addMarker(e){
  var latitude = $("#markerbody").append(e.latlng.lat.toFixed(2))
  var longitude = $("#markerbody").append(e.latlng.lng.toFixed(2))
  */
- var row = table.append("<tr>")
- 
+ var row = table.append('<tr><td>' + counter +'</td><td>'+ e.latlng.lat.toFixed(2) + '</td><td>' + e.latlng.lng.toFixed(2) + '</td></tr>');
  counter ++
-
- 
- var cell = row.append("<tr>");
-       cell.text(counter)
-       Object.values(e.latlng).forEach((val) => {
-         var cell = row.append("<td>")
-           cell.text(val);})
-
 
 }
 
