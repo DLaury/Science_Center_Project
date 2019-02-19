@@ -154,7 +154,7 @@ function rendercounties(){
       onEachFeature: function(feature, layer) {
         
         //console.log(feature)
-
+/*
         layer.bindPopup(feature.properties.County 
           + ", " 
           + feature.properties.State 
@@ -165,6 +165,7 @@ function rendercounties(){
           + " Mi²<br>Pop Density: "
           + Math.round(feature.properties.Pop_Den*10)/10
           + " People / Mi²");
+          */
       }
       
     }).addTo(layers.popcolors);
@@ -273,22 +274,28 @@ function init(){
 };
 
 
-var table = $("tbody")
+var table = $("#markerbody")
 
 function addMarker(e){
  // Add marker to map at click location; add popup window
  var newMarker = new L.marker(e.latlng).addTo(map);
  console.log(e.latlng)
-
- var latitude = $("tbody").append(e.latlng.lat.toFixed(2))
- var longitude = $("tbody").append(e.latlng.lng.toFixed(2))
+/*
+ var latitude = $("#markerbody").append(e.latlng.lat.toFixed(2))
+ var longitude = $("#markerbody").append(e.latlng.lng.toFixed(2))
+ */
  var row = table.append("<tr>")
+ 
  counter ++
- var cell = row.append("<td>");
+
+ 
+ var cell = row.append("<tr>");
        cell.text(counter)
        Object.values(e.latlng).forEach((val) => {
          var cell = row.append("<td>")
            cell.text(val);})
+
+
 }
 
 map.on("click", addMarker);

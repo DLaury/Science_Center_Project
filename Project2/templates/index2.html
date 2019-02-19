@@ -45,7 +45,7 @@
         </div>
     
         <div class="col-md-4">
-            <table border="2">
+            <table id="markerlist" border="2">
               <thead>
                 <tr align=center>
                   <th colspan="3" bgcolor="#ccc">Locations</th>
@@ -56,7 +56,7 @@
                   <th>Longitude</th>
                 </tr>
               </thead>
-              <tbody></tbody>
+              <tbody id="markerbody"></tbody>
             </table>
 
 
@@ -123,31 +123,31 @@
   <!-- Custom scripts for this template -->
   <script src="/static/js/grayscale.min.js"></script>
 
-   <!-- D3 -->
-   <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.5.0/d3.min.js"></script>
+  <!-- D3 -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.5.0/d3.min.js"></script>
 
-   <!-- MomentJS -->
-   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.1/moment.min.js"></script>
+  <!-- MomentJS -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.1/moment.min.js"></script>
  
-   <!-- Leaflet JavaScript -->
-   <script src="https://unpkg.com/leaflet@1.3.3/dist/leaflet.js"
-   integrity="sha512-tAGcCfR4Sc5ZP5ZoVz0quoZDYX5aCtEm/eu1KhSLj2c9eFrylXZknQYmxUssFaVJKvvc0dJQixhGjG2yXWiV9Q=="
-   crossorigin=""></script>
- 
-   <!-- Leaflet-Choropleth JavaScript -->
-   <script type="text/javascript" src="/static/js/choropleth.js"></script>
-   
-   <!-- Icons -->
-   <script src="/static/js/leaflet.extra-markers.min.js"></script>
- 
-   <!-- Leaflet heatmap plugin
-   <script type="text/javascript" src="/static/js/leaflet-heat.js"></script>
- -->
-   <!-- TURF Geographic functions JavaScript -->
-   <script src='https://npmcdn.com/@turf/turf/turf.min.js'></script>
- 
-   <!-- polyfill.io is library for using newer JavaScript features in older browers (such as Object.assign) -->
-   <script src="https://cdn.polyfill.io/v2/polyfill.min.js"></script>
+  <!-- Leaflet JavaScript -->
+  <script src="https://unpkg.com/leaflet@1.3.3/dist/leaflet.js"
+  integrity="sha512-tAGcCfR4Sc5ZP5ZoVz0quoZDYX5aCtEm/eu1KhSLj2c9eFrylXZknQYmxUssFaVJKvvc0dJQixhGjG2yXWiV9Q=="
+  crossorigin=""></script>
+
+  <!-- Leaflet-Choropleth JavaScript -->
+  <script type="text/javascript" src="/static/js/choropleth.js"></script>
+  
+  <!-- Icons -->
+  <script src="/static/js/leaflet.extra-markers.min.js"></script>
+
+  <!-- Leaflet heatmap plugin
+  <script type="text/javascript" src="/static/js/leaflet-heat.js"></script>
+-->
+  <!-- TURF Geographic functions JavaScript -->
+  <script src='https://npmcdn.com/@turf/turf/turf.min.js'></script>
+
+  <!-- polyfill.io is library for using newer JavaScript features in older browers (such as Object.assign) -->
+  <script src="https://cdn.polyfill.io/v2/polyfill.min.js"></script>
 
   <script type="text/javascript" src="/static/js/config.js"></script>
   <!-- JS -->
