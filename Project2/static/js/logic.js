@@ -1,61 +1,9 @@
-/*
-var lightmap = L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}", {
-  attribution: "Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>",
-  maxZoom: 18,
-  id: "mapbox.streets",
-  accessToken: API_KEY
-})
 
-console.log(lightmap)
-
-var map = L.map("map-id", {
-  center: [39.8283, -98.5795],
-  zoom: 4
-});
-
-lightmap.addTo(map);
-
-
-var bbox = [[-124.763068, 24.523096],
-[-66.949895, 24.523096],
-[-66.949895, 49.384358],
-[-124.763068, 49.384358],
-[-124.763068, 24.523096]]
-
-
-var bbox = [[24.523096,-124.763068],
-[24.523096, -66.949895],
-[49.384358, -66.949895],
-[49.384358, -124.763068],
-[24.523096, -124.763068]]
-
-
-
-console.log("bbox", bbox);
-console.log("swapped", swaplatlon(bbox));
-
-L.polygon(bbox).addTo(map);
-
-function swaplatlon(inputlist){
-  var outputlist=[];
-  console.log("pre", inputlist);
-
-  inputlist.forEach(function(setofcoords) {
-    var x = setofcoords[1]
-    var y = setofcoords[0]
-    console.log(x,y)
-    outputlist.push([x,y])
-  });
-
-  console.log("post", outputlist);
-  return outputlist;
-};
-*/
 
 var map, layers, bboxpoly, bbox1, bbox2; //universals 
 var centergeo=[];
-var centerpath = "/data/scicenter.json";
-var countypath = "/data/data.json";
+var centerpath = "../static/data/scicenter.json";
+var countypath = "../static/data/data.json";
 
 function swaplatlon(inputlist){
   var outputlist=[];
@@ -259,7 +207,7 @@ function rendercounties(){
 function rendervoronoi() {
   console.log("rendervoi", centergeo, bbox2)
 
-  countypath = "/data/data.json"; 
+  //countypath = "/data/data.json"; 
   d3.json(countypath, function(data1) {
     
       //This works but is resource heavy
@@ -300,7 +248,7 @@ function rendervoronoi() {
     
     console.log("totals", totalarea / tests.features.length)
 
-
+/*
     var heatArray = [];
 
     centergeo.features.forEach(function(data3) {
@@ -312,7 +260,7 @@ function rendervoronoi() {
       radius: 6160,
       blur: 5000
     }).addTo(layers.composite);
-
+*/
     rendercounties();
   });
 
@@ -323,5 +271,26 @@ function init(){
   rendercenters();
   
 };
+
+
+var table = $("tbody")
+
+function addMarker(e){
+ // Add marker to map at click location; add popup window
+ var newMarker = new L.marker(e.latlng).addTo(map);
+ console.log(e.latlng)
+
+ var latitude = $("tbody").append(e.latlng.lat.toFixed(2))
+ var longitude = $("tbody").append(e.latlng.lng.toFixed(2))
+ var row = table.append("<tr>")
+ counter ++
+ var cell = row.append("<td>");
+       cell.text(counter)
+       Object.values(e.latlng).forEach((val) => {
+         var cell = row.append("<td>")
+           cell.text(val);})
+}
+
+map.on("click", addMarker);
 
 init();
