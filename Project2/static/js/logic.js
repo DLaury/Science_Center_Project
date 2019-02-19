@@ -1,6 +1,6 @@
 
 
-var map, layers, bboxpoly, bbox1, bbox2; //universals 
+var map, layers, bboxpoly, bbox1, bbox2, currentcounty, currentstate; //universals 
 var centergeo=[];
 var centerpath = "../static/data/scicenter.json";
 var countypath = "../static/data/data.json";
@@ -24,7 +24,7 @@ function swaplatlon(inputlist){
 var lightmap = L.tileLayer("https://api.mapbox.com/styles/v1/mapbox/light-v9/tiles/256/{z}/{x}/{y}?access_token={accessToken}", {
   attribution: "Map data &copy; <a href=\"http://openstreetmap.org\">OpenStreetMap</a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"http://mapbox.com\">Mapbox</a>",
   maxZoom: 18,
-  id: "mapbox.light",
+  id: "mapbox.streets",
   accessToken: API_KEY
 });
 
@@ -32,19 +32,17 @@ layers = {
   centers: new L.LayerGroup(),
  // counties: new L.LayerGroup(),
   voronoipolys: new L.LayerGroup(),
-  popcolors: new L.LayerGroup(),
-  composite: new L.LayerGroup(),
+  popcolors: new L.LayerGroup()
 }
 
 var map = L.map("map-id", {
     center: [39.8283, -98.5795],
-    zoom: 5,
+    zoom: 4,
     layers: [
       layers.centers,
       //layers.counties,
       layers.popcolors,
-      layers.voronoipolys,
-      layers.composite
+      layers.voronoipolys
     ]
 });
   
@@ -53,8 +51,6 @@ var overlays = {
   //"Counties": layers.counties,
   "Sci Center Distances": layers.voronoipolys,
   "Population Density": layers.popcolors,
-  
-  "Composite Suitability": layers.composite
 }
 
 L.control.layers(null, overlays).addTo(map);
@@ -147,14 +143,14 @@ function rendercounties(){
         // Border color
         color: "#fff",
         weight: 1,
-        fillOpacity: 0.6
+        fillOpacity: 0.5
       },
       
       // Binding a pop-up to each layer
       onEachFeature: function(feature, layer) {
         
         //console.log(feature)
-/*
+        
         layer.bindPopup(feature.properties.County 
           + ", " 
           + feature.properties.State 
@@ -165,7 +161,7 @@ function rendercounties(){
           + " Mi²<br>Pop Density: "
           + Math.round(feature.properties.Pop_Den*10)/10
           + " People / Mi²");
-          */
+          
       }
       
     }).addTo(layers.popcolors);
@@ -182,8 +178,8 @@ function rendercounties(){
       var labels = [];
 
       // Add min & max
-      var legendInfo = "<h1>Population<br>Density</h1>" +
-        "<div class=\"labels\">" + "People per Square Mile" 
+      var legendInfo = "<b>Population<br>Density</b>" +
+        "<div class=\"labels\">" + "People per<br>Square Mile" 
          // "<div class=\"min\">" + limits[0] + "</div>" +
          // "<div class=\"max\">" + limits[limits.length - 1] + "</div>" +
         "</div>";
@@ -278,17 +274,25 @@ var table = $("#markerbody")
 
 function addMarker(e){
  // Add marker to map at click location; add popup window
- var newMarker = new L.marker(e.latlng).addTo(map);
+ //var newMarker = new L.marker(e.latlng).addTo(map);
+
+ L.circle(e.latlng, {
+  color: "Black",
+  fillColor: "white",
+  fillOpacity: 0.75,
+  radius: 150
+}).addTo(map);
+
  console.log(e.latlng)
 /*
  var latitude = $("#markerbody").append(e.latlng.lat.toFixed(2))
  var longitude = $("#markerbody").append(e.latlng.lng.toFixed(2))
  */
- var row = table.append('<tr><td>' + counter +'</td><td>'+ e.latlng.lat.toFixed(2) + '</td><td>' + e.latlng.lng.toFixed(2) + '</td></tr>');
+ var row = table.append('<tr><td>' + counter +'</td><td>'+ e.latlng.lat.toFixed(4) + '</td><td>' + e.latlng.lng.toFixed(4) + '</td></tr>');
  counter ++
-
+ console.log(layers.popcolors)
 }
 
-map.on("click", addMarker);
+map.on("dblclick", addMarker);
 
 init();
