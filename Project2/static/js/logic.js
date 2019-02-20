@@ -38,7 +38,7 @@ layers = {
 
 var map = L.map("map-id", {
     center: [39.8283, -98.5795],
-    zoom: 5,
+    zoom: 4,
     layers: [
       layers.centers,
       //layers.counties,
@@ -98,7 +98,6 @@ function rendercenters() {
 
     centergeo = data;
 
-
     console.log("end of centerpath", centergeo)
 
     rendervoronoi();
@@ -154,7 +153,7 @@ function rendercounties(){
       onEachFeature: function(feature, layer) {
         
         //console.log(feature)
-/*
+
         layer.bindPopup(feature.properties.County 
           + ", " 
           + feature.properties.State 
@@ -165,7 +164,7 @@ function rendercounties(){
           + " Mi²<br>Pop Density: "
           + Math.round(feature.properties.Pop_Den*10)/10
           + " People / Mi²");
-          */
+          
       }
       
     }).addTo(layers.popcolors);
@@ -182,8 +181,8 @@ function rendercounties(){
       var labels = [];
 
       // Add min & max
-      var legendInfo = "<h1>Population<br>Density</h1>" +
-        "<div class=\"labels\">" + "People per Square Mile" 
+      var legendInfo = "<B>Population<br>Density</B>" +
+        "<div class=\"labels\">" + "People per<br>Square Mile" 
          // "<div class=\"min\">" + limits[0] + "</div>" +
          // "<div class=\"max\">" + limits[limits.length - 1] + "</div>" +
         "</div>";
@@ -249,18 +248,6 @@ function rendervoronoi() {
     
     console.log("totals", totalarea / tests.features.length)
 
-/*
-    var heatArray = [];
-    centergeo.features.forEach(function(data3) {
-     // console.log("data1", data3.geometry.coordinates)
-      heatArray.push([data3.geometry.coordinates[1], data3.geometry.coordinates[0]]);
-    });
-      
-    L.heatLayer(heatArray, {
-      radius: 6160,
-      blur: 5000
-    }).addTo(layers.composite);
-*/
     rendercounties();
   });
 
@@ -292,12 +279,12 @@ function addMarker(e){
  var latitude = $("#markerbody").append(e.latlng.lat.toFixed(2))
  var longitude = $("#markerbody").append(e.latlng.lng.toFixed(2))
  */
- var row = table.append('<tr><td>' + counter +'</td><td>'+ e.latlng.lat.toFixed(2) + '</td><td>' + e.latlng.lng.toFixed(2) + '</td></tr>');
+ var row = table.append('<tr><td>' + counter +'</td><td>'+ e.latlng.lat.toFixed(4) + '</td><td>' + e.latlng.lng.toFixed(4) + '</td></tr>');
  counter ++
 
 }
 
-map.on("click", addMarker);
+map.on("dblclick", addMarker);
 
 init();
 
@@ -307,4 +294,21 @@ function exportData() {
   var tableData = d3.select("#markerlist");
   console.log(tableData)
 
+}
+
+function exportTableToCSV(filename) {
+    var csv = [];
+    var rows = document.querySelectorAll("table tr");
+    
+    for (var i = 0; i < rows.length; i++) {
+        var row = [], cols = rows[i].querySelectorAll("td, th");
+        
+        for (var j = 0; j < cols.length; j++) 
+            row.push(cols[j].innerText);
+        
+        csv.push(row.join(","));        
+    }
+
+    // Download CSV file
+    downloadCSV(csv.join("\n"), filename);
 }
