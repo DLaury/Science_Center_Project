@@ -10,6 +10,10 @@ def home():
 def index2():
     return render_template('index2.html')
 
+@app.route('/StudentMap/')
+def studentMap():
+    return render_template('studentMap.html')
+
 @app.route('/index3/')
 def index3():
     return render_template('index3.html')
