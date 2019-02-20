@@ -3,9 +3,7 @@ body {
   margin: 0;
 }
 
-#map-id,
-body,
-html {
+#map-id { 
   height: 400px;
-  width: 600px;
+  /* width: 600px; */
 }

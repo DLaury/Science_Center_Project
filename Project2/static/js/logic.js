@@ -276,9 +276,18 @@ function init(){
 var counter= 0;
 var table = $("#markerbody")
 
+var greenIcon = new L.Icon({
+  iconUrl: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png',
+  shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+  popupAnchor: [1, -34],
+  shadowSize: [41, 41]
+});
+
 function addMarker(e){
  // Add marker to map at click location; add popup window
- var newMarker = new L.marker(e.latlng).addTo(map);
+ var newMarker = new L.marker(e.latlng, {icon: greenIcon}).addTo(map);
  console.log(e.latlng)
 /*
  var latitude = $("#markerbody").append(e.latlng.lat.toFixed(2))
@@ -292,3 +301,11 @@ function addMarker(e){
 map.on("click", addMarker);
 
 init();
+
+d3.select("#exportButton").on("click", exportData);
+
+function exportData() {
+  var tableData = d3.select("#markerlist");
+  console.log(tableData)
+
+}

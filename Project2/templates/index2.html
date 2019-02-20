@@ -39,18 +39,15 @@
       <!-- Portfolio Item Row -->
       <div class="row">
     
-        <div class="col-md-12 map-container">
+        <div class="col-md-8 map-container">
 
             <div id="map-id"></div>
           <!-- <img class="img-fluid" src="http://placehold.it/750x500" alt=""> -->
         </div>
     
-        <!-- <div class="col-md-4"> -->
-            <table id="markerlist" border="2">
+        <div class="col-md-4">
+            <table class="table table-hover table-striped table-bordered" id="markerlist">
               <thead>
-                <tr align=center>
-                  <th colspan="3" bgcolor="#ccc">Locations</th>
-                </tr>
                 <tr>
                   <th>Marker</th>
                   <th>Latitude</th>
@@ -59,6 +56,12 @@
               </thead>
               <tbody id="markerbody"></tbody>
             </table>
+
+
+            <form action="/exportdata" method="POST">
+              <button class="btn btn-default" id="exportButton">Export</button>
+            </form>
+            
 
 
           <!-- <h3 class="my-3">Project Description</h3>
