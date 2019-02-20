@@ -251,7 +251,6 @@ function rendervoronoi() {
 
 /*
     var heatArray = [];
-
     centergeo.features.forEach(function(data3) {
      // console.log("data1", data3.geometry.coordinates)
       heatArray.push([data3.geometry.coordinates[1], data3.geometry.coordinates[0]]);
