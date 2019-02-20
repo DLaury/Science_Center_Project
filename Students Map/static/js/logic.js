@@ -85,7 +85,7 @@ info.update = function (props) {
     // Display the information for the state that is being hovered on or tell user to hover over a state
     this._div.innerHTML = '<h4>State</h4>' + (props ?
         props.State + '<br>Significant Difference: ' + props['Significant Difference'] + 
-        '<br>Score: ' + props['Score (0-300)'] + '<br>% With Basic Understanding: '
+        '<br>Score (0-300): ' + props['Score (0-300)'] + '<br>% With Basic Understanding: '
          + props['Above Basic (%)']  + '<br>% With Proficiency: ' + props['Above Proficient (%)']
         : 'Hover over a state')
 };
