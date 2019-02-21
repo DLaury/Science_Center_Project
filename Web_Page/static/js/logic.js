@@ -243,10 +243,10 @@ function rendervoronoi() {
       var vorarea = turf.area(data2.geometry);
          
       totalarea += vorarea;
-      console.log("numbers", vorarea, totalarea);
+      //console.log("numbers", vorarea, totalarea);
     });
     
-    console.log("totals", totalarea / tests.features.length)
+    console.log("totals :", totalarea / tests.features.length)
 
     rendercounties();
   });
