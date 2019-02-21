@@ -33,7 +33,7 @@ layers = {
  // counties: new L.LayerGroup(),
   voronoipolys: new L.LayerGroup(),
   popcolors: new L.LayerGroup(),
-  composite: new L.LayerGroup(),
+ // composite: new L.LayerGroup(),
 }
 
 var map = L.map("map-id", {
@@ -44,7 +44,7 @@ var map = L.map("map-id", {
       //layers.counties,
       layers.popcolors,
       layers.voronoipolys,
-      layers.composite
+      //layers.composite
     ]
 });
   
@@ -54,7 +54,7 @@ var overlays = {
   "Sci Center Distances": layers.voronoipolys,
   "Population Density": layers.popcolors,
   
-  "Composite Suitability": layers.composite
+  //"Composite Suitability": layers.composite
 }
 
 L.control.layers(null, overlays).addTo(map);
@@ -287,7 +287,7 @@ function addMarker(e){
 map.on("dblclick", addMarker);
 
 init();
-
+/*
 d3.select("#exportButton").on("click", exportData);
 
 function exportData() {
@@ -311,4 +311,4 @@ function exportTableToCSV(filename) {
 
     // Download CSV file
     downloadCSV(csv.join("\n"), filename);
-}
+}*/
