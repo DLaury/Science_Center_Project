@@ -1,6 +1,6 @@
 <h1>Science Center Project</h1>
 <p>This project combines information from the US Census with API results of science center locations from astc.org, and contrasts them.  The business use for this application is to higlight regions where science centers are not part of the ASTC network, or where additional science centers warrant being built.  
-<p>![Screenshot](Presentation/WebPage.png)
+<p><img src="Presentation/WebPage.pn">
 <p>The core functionality lies within Web_Page folder where you will be able to launch the website, which is accessible here: http://sciencecentersapp-env.nq2tykwyxd.us-east-1.elasticbeanstalk.com.   
 <p>Data munging and cleanup lies within the Data_Cleanup_And_Output folder. This is where the cleaning and retrieval of the Census data lies, as well as the function that was developed to turn both the census data and science center data into geoJSONs.  Modification of both data sets was required to place the data into an appropriate format for geospatial calculations.  Unused data was trimmed out. 
 <p>![Screenshot](Presentation/ScienceCenters.png)
